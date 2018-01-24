@@ -1,0 +1,38 @@
+.progress-block {
+    width: 200px;
+    height: 200px;
+    margin: 0;
+}
+
+.progress-block {
+    animation: progress-block-rotation-keyframes linear;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    animation-play-state: paused;
+}
+
+@keyframes progress-block-rotation-keyframes {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.circle-svg {
+    transform: rotate(-90deg);
+}
+
+
+.circle-svg__background,
+.circle-svg__fill {
+    stroke-dashoffset: 0;
+    stroke: #DDD;
+    stroke-width: 12px;
+    fill: none;
+}
+
+.circle-svg__fill {
+    stroke: #fc0;
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="checkbox/checkbox.css">
+    <link rel="stylesheet" href="progressblockcontrol/progressblockcontrol.css">
+    <link rel="stylesheet" href="progressblock/progressblock.css">
+    <title>ProgressBlock</title>
+</head>
+
+<body>
+    <h1 class="title">Progress</h1>
+    <div id="root">
+        <div class="progress-block">
+            <svg class="progress-block__circle-svg circle-svg" width="200" height="200">
+                <circle class="circle-svg__background" r="90" cx="100" cy="100"></circle>
+                <circle class="circle-svg__fill" r="90" cx="100" cy="100"></circle>
+            </svg>
+        </div>
+
+        <div class="progress-block-control">
+            <label class="progress-block-control__label">
+                <input class="progress-block-control__input" type="number" size="3" min="0" max="100" value="0">Value</label>
+
+            <label class="progress-block-control__checkbox checkbox">
+                <input type="checkbox" class="checkbox__input checkbox__input_animated" />
+                <div class="checkbox__text">Animate</div>
+            </label>
+
+            <label class="progress-block-control__checkbox checkbox">
+                <input type="checkbox" class="checkbox__input checkbox__input_hidden" />
+                <div class="checkbox__text">Hide</div>
+            </label>
+        </div>
+    </div>
+
+
+    <!-- без сборщика делал модули через замыкания -->
+    <script src="progressblock/progressblock.js"></script>
+    <script src="progressblockcontrol/progressblockcontrol.js"></script>
+</body>
+
+</html>
