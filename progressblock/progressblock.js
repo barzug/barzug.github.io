@@ -1,4 +1,5 @@
-;(function () {
+;
+(function () {
     /**
      * @description Управляет состоянием элемента 'ProgressBlock'
      * @constructor
@@ -19,10 +20,15 @@
         // В зависимости от длины дуги и нового значения блока
         // делает длину "штрихованой" на длину окружности для возможности с помощью смещения Dashoffset
         // как полностью заполнить круг, так и "спрятать" заполнение
-        // и добавляет анимацию
-        this.fillCircle.style.strokeDasharray = this.circleLength;
         this.fillCircle.style.strokeDashoffset = this.circleLength;
-        this.fillCircle.style.transition = "stroke-dashoffset 1s linear";
+        this.fillCircle.style.strokeDasharray = this.circleLength;
+
+        // в некоторых браузерах (например safari)
+        // не успевало измениться свойство strokeDashoffset до того как добавлялася анимация
+        setTimeout(() => {
+            this.fillCircle.style.transition = "stroke-dashoffset 1s linear";
+        }, 0)
+
 
 
         /**

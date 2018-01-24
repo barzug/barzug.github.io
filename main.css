@@ -27,13 +27,15 @@ body {
     font-size: 1.5em;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 300px),
+screen and (orientation: portrait) {
     #root {
         flex-direction: column;
     }
 }
 
-@media screen and (max-width: 600px), screen and (max-height: 350px) {
+@media screen and (max-width: 600px),
+screen and (max-height: 350px) {
     #root {
         width: 100%;
         height: 100%;
