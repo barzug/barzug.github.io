@@ -1,32 +1,30 @@
-;
-(function () {
+;(function () {
     /**
      * @description Управляет состоянием элемента 'ProgressBlock'
      * @constructor
      * @param {Element} progressBlock
      */
     function ProgressBlockManager(progressBlock) {
-        this.progressBlock = progressBlock;
-        this.currentValue = 0;
-        this.isAnimated = false;
-        this.isHide = false;
+        let currentValue = 0;
+        let isAnimated = false;
+        let isHide = false;
 
-        this.fillCircle = progressBlock.querySelector('.circle-svg__fill');
+        const fillCircle = progressBlock.querySelector('.circle-svg__fill');
 
         // считает длину дуги в зависимости от радиуса окружности
-        let radius = this.fillCircle.r.animVal.value;
-        this.circleLength = Math.PI * radius * 2;
+        let radius = fillCircle.r.animVal.value;
+        const circleLength = Math.PI * radius * 2;
 
         // В зависимости от длины дуги и нового значения блока
         // делает длину "штрихованой" на длину окружности для возможности с помощью смещения Dashoffset
         // как полностью заполнить круг, так и "спрятать" заполнение
-        this.fillCircle.style.strokeDashoffset = this.circleLength;
-        this.fillCircle.style.strokeDasharray = this.circleLength;
+        fillCircle.style.strokeDashoffset = circleLength;
+        fillCircle.style.strokeDasharray = circleLength;
 
         // в некоторых браузерах (например safari)
         // не успевало измениться свойство strokeDashoffset до того как добавлялася анимация
         setTimeout(() => {
-            this.fillCircle.style.transition = "stroke-dashoffset 1s linear";
+            fillCircle.style.transition = "stroke-dashoffset 1s linear";
         }, 0)
 
 
@@ -61,9 +59,11 @@
 
             // В зависимости от длины дуги и нового значения блока
             // смещает "заполнение" окружности на соответствующее значение
-            let arcLength = ((100 - newValue) / 100) * this.circleLength;
+            let arcLength = ((100 - newValue) / 100) * circleLength;
 
-            this.fillCircle.style.strokeDashoffset = arcLength;
+            fillCircle.style.strokeDashoffset = arcLength;
+
+            currentValue = newValue;
         };
 
         /**
@@ -72,11 +72,11 @@
          */
         this.setAnimation = function (value) {
             if (value.toLowerCase() === 'yes') {
-                this.isAnimated = true;
-                this.progressBlock.style.webkitAnimationPlayState = 'running';
+                isAnimated = true;
+                progressBlock.style.webkitAnimationPlayState = 'running';
             } else {
-                this.isAnimated = false;
-                this.progressBlock.style.webkitAnimationPlayState = 'paused';
+                isAnimated = false;
+                progressBlock.style.webkitAnimationPlayState = 'paused';
             }
         };
 
@@ -85,13 +85,35 @@
          * @param {string} value - 'yes - прячет блок, в противном случае показывает'
          */
         this.setHide = function (value) {
+            debugger;
             if (value.toLowerCase() === 'yes') {
-                this.isHide = true;
-                this.progressBlock.style.opacity = '0';
+                isHide = true;
+                progressBlock.style.opacity = '0';
             } else {
-                this.isHide = false;
-                this.progressBlock.style.opacity = '1';
+                isHide = false;
+                progressBlock.style.opacity = '1';
             }
+        }
+
+        /**
+         * @return {number} - текущее значение блока
+         */
+        this.getCurrentValue = function () {
+            return currentValue;
+        }
+
+        /**
+         * @return {boolean} - анимирован ли блок
+         */
+        this.getIsAnimated = function () {
+            return isAnimated;
+        }
+
+        /**
+         * @return {boolean} - виден ли блок
+         */
+        this.getIsHide = function () {
+            return isHide;
         }
     };
 
